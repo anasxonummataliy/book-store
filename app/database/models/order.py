@@ -2,13 +2,13 @@ from typing import TYPE_CHECKING, List
 from sqlalchemy import String, BigInteger, Boolean, Float, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database.base import TimeBaseModel, Base
+from app.database.models.user import BaseRepository
 
 if TYPE_CHECKING:
     from .book import Book
 
 
-
-class Order(TimeBaseModel):
+class Order(TimeBaseModel, BaseRepository["Order"]):
     __tablename__ = "orders"
 
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
@@ -18,7 +18,8 @@ class Order(TimeBaseModel):
     order_items: Mapped[List["OrderItem"]] = relationship("OrderItem", back_populates="order")
     books: Mapped[List["Book"]] = relationship("Book", secondary="order_items", viewonly=True)
 
-class OrderItem(Base):
+
+class OrderItem(Base, BaseRepository["OrderItem"]):
     __tablename__ = "order_items"
 
     order_id: Mapped[int] = mapped_column(ForeignKey("orders.id"), nullable=False)

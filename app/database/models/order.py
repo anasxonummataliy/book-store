@@ -1,7 +1,10 @@
-from typing import List
+from typing import TYPE_CHECKING, List
 from sqlalchemy import String, BigInteger, Boolean, Float, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database.base import TimeBaseModel, Base
+
+if TYPE_CHECKING:
+    from .book import Book
 
 
 

@@ -1,7 +1,10 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Float, String, BigInteger, ForeignKey
 from app.database.base import TimeBaseModel
-from typing import List
+from typing import TYPE_CHECKING, List
+
+if TYPE_CHECKING:
+    from .order import Order, OrderItem
 
 
 class Book(TimeBaseModel):

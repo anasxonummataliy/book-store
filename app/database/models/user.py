@@ -13,4 +13,4 @@ class User(TimeBaseModel):
     hashed_password: Mapped[str] = mapped_column(String, nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
-    category_id: Mapped[int] = mapped_column(ForeignKey("categories.id"), nullable=True)
+
